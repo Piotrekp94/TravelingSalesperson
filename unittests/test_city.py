@@ -1,13 +1,15 @@
 from city import *
 import pytest
 
+
 @pytest.mark.parametrize(
     "city1,city2,expected",
     [(City(1, 2), City(1, 2), 0),
      (City(2, 3), City(4, 5), 2.8284271247461903)],
 )
-def test_distanceBetweenCities(city1,city2,expected):
+def test_distanceBetweenCities(city1, city2, expected):
     assert distanceBetweenCities(city1, city2) == expected
+
 
 @pytest.mark.parametrize(
     "citieslist,expectedDistance",
