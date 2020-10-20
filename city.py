@@ -10,7 +10,7 @@ def calculateDistance(cities_list) :
     totalDistance = 0
     for n in range (len(cities_list) - 1) :
         totalDistance += distanceBetweenCities(cities_list[n], cities_list[n + 1])
-    totalDistance += distanceBetweenCities(cities_list[0], cities_list[n - 1])
+    totalDistance += distanceBetweenCities(cities_list[0], cities_list[len(cities_list) - 1])
     return totalDistance
 
 def distanceBetweenCities(city1, city2):
