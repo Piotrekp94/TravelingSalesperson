@@ -6,16 +6,19 @@ from geneticAlgorithm import *
 import math
 
 
+white = (255, 255, 255)
+yellow = (255, 255, 0)
+violet = (136, 78, 160)
+
+
 def main():
     geneticAlgorithm = GeneticAlgorithm()
     shortestPath = []
-    numberOfCities = 10
+    numberOfCities = 50
     screen_width = 1000
     screen_height = 1000
     FPS = 60
-    white = (255, 255, 255)
-    yellow = (255, 255, 0)
-    violet = (136, 78, 160)
+
     backgroundColor = (0, 0, 0)
     cities = []
     citiesOrder = []
@@ -26,23 +29,40 @@ def main():
     shortestDistance = 1.7976931348623157e+308
 
     pygame.init()
+    pygame.font.init()
+
     screen = pygame.display.set_mode((screen_width, screen_height))
 
     while run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-            screen.fill(backgroundColor)
-            geneticAlgorithm.generateNextPopulation()
-            drawCitiesLocations(pygame, screen, geneticAlgorithm.cities, white)
-            orderedCities = []
-            for n in range(len(geneticAlgorithm.bestOrder.citiesOrder)):
-                orderedCities.append(
-                    geneticAlgorithm.cities[geneticAlgorithm.bestOrder.citiesOrder[n]])
-            drawCurrentShortestPath(
-                pygame, screen, orderedCities, geneticAlgorithm.bestOrder, violet)
 
-            pygame.display.update()
+        geneticAlgorithm.generateNextPopulation()
+        drawGraph(geneticAlgorithm, screen)
+        drawData(geneticAlgorithm, screen)
+
+        pygame.display.update()
+        screen.fill(backgroundColor)
+
+def drawData(geneticAlgorithm, screen):
+    myfont = pygame.font.SysFont('Comic Sans MS', 30)
+    screen.blit(myfont.render("Generation: " + str(geneticAlgorithm.generation), False, (255, 0, 0)),(0,0))
+    screen.blit(myfont.render("AvgFitness: " + str(geneticAlgorithm.avgFitness), False, (255, 0, 0)),(0,30))
+
+
+
+
+
+
+def drawGraph(geneticAlgorithm, screen):
+    drawCitiesLocations(pygame, screen, geneticAlgorithm.cities, white)
+    orderedCities = []
+    for n in range(len(geneticAlgorithm.bestOrder.citiesOrder)):
+        orderedCities.append(
+            geneticAlgorithm.cities[geneticAlgorithm.bestOrder.citiesOrder[n]])
+    drawCurrentShortestPath(pygame, screen, orderedCities,
+                            geneticAlgorithm.bestOrder, violet)
 
 
 def drawCitiesLocations(pygame, screen, newCitiesOrder, color):

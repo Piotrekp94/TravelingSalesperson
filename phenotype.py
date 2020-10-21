@@ -1,5 +1,7 @@
 from city import *
 import math
+import random
+
 
 class Phenotype:
     def __init__(self, citiesOrder):
@@ -13,3 +15,8 @@ class Phenotype:
             cityOrdered.append(citiesList[self.citiesOrder[n]])
         self.distance = calculateDistance(cityOrdered)
         self.fitness = 1 / self.distance
+
+    def mutate(self):
+        i = random.randint(0, len(self.citiesOrder) - 1)
+        j = random.randint(0, len(self.citiesOrder) - 1)
+        self.citiesOrder[i], self.citiesOrder[j] = self.citiesOrder[j], self.citiesOrder[i]
