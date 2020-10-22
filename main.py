@@ -45,14 +45,15 @@ def main():
         pygame.display.update()
         screen.fill(backgroundColor)
 
+
 def drawData(geneticAlgorithm, screen):
     myfont = pygame.font.SysFont('Comic Sans MS', 30)
-    screen.blit(myfont.render("Generation: " + str(geneticAlgorithm.generation), False, (255, 0, 0)),(0,0))
-    screen.blit(myfont.render("AvgFitness: " + str(geneticAlgorithm.avgFitness), False, (255, 0, 0)),(0,30))
-
-
-
-
+    screen.blit(myfont.render("Generation: " +
+                              str(geneticAlgorithm.generation), False, (255, 0, 0)), (0, 0))
+    screen.blit(myfont.render("shortestDistance: " +
+                              str(geneticAlgorithm.shortestDistance), False, (255, 0, 0)), (0, 35))
+    screen.blit(myfont.render("avgGenDistance: " +
+                              str(geneticAlgorithm.avgDistance), False, (255, 0, 0)), (0, 70))
 
 
 def drawGraph(geneticAlgorithm, screen):
