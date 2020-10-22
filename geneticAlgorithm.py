@@ -26,6 +26,7 @@ class GeneticAlgorithm:
     def findLowestDistance(self):
         for n in range(len(self.population)):
             if(self.population[n].distance < self.shortestDistance):
+
                 self.bestOrder = copy.deepcopy(
                     self.population[n])
                 self.shortestDistance = self.population[n].distance

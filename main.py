@@ -14,7 +14,7 @@ violet = (136, 78, 160)
 def main():
     geneticAlgorithm = GeneticAlgorithm()
     shortestPath = []
-    numberOfCities = 50
+    numberOfCities = 10
     screen_width = 1000
     screen_height = 1000
     FPS = 60
