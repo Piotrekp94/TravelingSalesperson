@@ -1,7 +1,6 @@
-from city import *
-from geneticAlgorithm import *
-
 import pytest
+
+from geneticAlgorithm import *
 
 
 def prepareGA():
@@ -62,12 +61,6 @@ def test_integrationtest(geneticAlgorithm, lowestDistance):
     geneticAlgorithm.calculateAvgDistance()
 
     assert geneticAlgorithm.avgDistance == 10.40027073974495
-
-
-
-
-
-
 
 
 def test_generateRandomCities():

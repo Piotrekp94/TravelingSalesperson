@@ -1,6 +1,6 @@
-from city import *
-import math
 import random
+
+from city import *
 
 
 class Phenotype:

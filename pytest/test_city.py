@@ -1,5 +1,6 @@
-from city import *
 import pytest
+
+from city import *
 
 
 @pytest.mark.parametrize(

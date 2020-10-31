@@ -1,8 +1,6 @@
-from city import *
-from phenotype import *
-import random
-import math
 import copy
+
+from phenotype import *
 
 
 def crossover(phenotypeX, phenotypeY):

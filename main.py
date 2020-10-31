@@ -3,7 +3,6 @@ import pygame.freetype
 
 from geneticAlgorithm import *
 
-
 white = (255, 255, 255)
 yellow = (255, 255, 0)
 violet = (136, 78, 160)
@@ -64,5 +63,6 @@ def drawCurrentShortestPath(pygame, screen, shortestPath, color):
     for n in range(len(shortestPath) - 1):
         pygame.draw.line(screen, color, (shortestPath[n].x, shortestPath[n].y), (
             shortestPath[n + 1].x, shortestPath[n + 1].y), 3)
+
 
 main()
