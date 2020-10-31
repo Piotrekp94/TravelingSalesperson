@@ -5,6 +5,17 @@ import math
 import copy
 
 
+def crossover(phenotypeX, phenotypeY):
+    start = random.randint(0, len(phenotypeX.citiesOrder) - 1)
+    end = random.randint(start, len(phenotypeX.citiesOrder) - 1)
+    citiesOrder = phenotypeX.citiesOrder[start:end]
+    for n in range(0, len(phenotypeX.citiesOrder)):
+        temp = phenotypeY.citiesOrder[n]
+        if temp not in citiesOrder:
+            citiesOrder.append(temp)
+    return Phenotype(citiesOrder)
+
+
 class GeneticAlgorithm:
     def __init__(self):
         self.generation = 0
@@ -25,8 +36,7 @@ class GeneticAlgorithm:
 
     def findLowestDistance(self):
         for n in range(len(self.population)):
-            if(self.population[n].distance < self.shortestDistance):
-
+            if self.population[n].distance < self.shortestDistance:
                 self.bestOrder = copy.deepcopy(
                     self.population[n])
                 self.shortestDistance = self.population[n].distance
@@ -36,10 +46,10 @@ class GeneticAlgorithm:
             self.population[n].calculateFitness(self.cities)
 
     def calculateAvgDistance(self):
-        sum = 0
+        sumDistance = 0
         for n in range(len(self.population)):
-            sum += self.population[n].distance
-        self.avgDistance = sum / len(self.population)
+            sumDistance += self.population[n].distance
+        self.avgDistance = sumDistance / len(self.population)
 
     def normalizeFitness(self):
         sum = 0
@@ -55,29 +65,17 @@ class GeneticAlgorithm:
         for n in range(len(self.population)):
             phenotypeX = pickOne(self.population)
             phenotypeY = pickOne(self.population)
-            phenotype = self.crossover(phenotypeX, phenotypeY)
+            phenotype = crossover(phenotypeX, phenotypeY)
             phenotype.mutate()
             newPopulation.append(copy.deepcopy(phenotype))
         self.population = newPopulation
-
-    def crossover(self, phenotypeX, phenotypeY):
-        citiesOrder = []
-
-        start = random.randint(0, len(phenotypeX.citiesOrder) - 1)
-        end = random.randint(start, len(phenotypeX.citiesOrder) - 1)
-        citiesOrder = phenotypeX.citiesOrder[start:end]
-        for n in range(0, len(phenotypeX.citiesOrder)):
-            temp = phenotypeY.citiesOrder[n]
-            if temp not in citiesOrder:
-                citiesOrder.append(temp)
-        return Phenotype(citiesOrder)
 
 
 def pickOne(lista):
     index = 0
     r = random.uniform(0, 1)
 
-    while (r > 0):
+    while r > 0:
         r = r - lista[index].fitness
         index += 1
     return lista[index - 1]
@@ -86,7 +84,7 @@ def pickOne(lista):
 def generateRandomCities(citiesAmount, maxX, maxY):
     cities = []
     for n in range(citiesAmount):
-        cities.append(City(random.randint(0, maxX),  random.randint(0, maxY)))
+        cities.append(City(random.randint(0, maxX), random.randint(0, maxY)))
     return cities
 
 
