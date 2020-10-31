@@ -1,3 +1,5 @@
+import csv
+
 import pygame
 import pygame.freetype
 
@@ -8,8 +10,15 @@ yellow = (255, 255, 0)
 violet = (136, 78, 160)
 
 
+
+
+def saveResultToCsv(geneticAlgorithm):
+    writer = csv.writer(open("file", 'w'))
+    writer.writerow(geneticAlgorithm.cities)
+
+
 def main():
-    geneticAlgorithm = GeneticAlgorithm()
+    geneticAlgorithm = GeneticAlgorithm("Test")
     screen_width = 1000
     screen_height = 1000
     backgroundColor = (0, 0, 0)
@@ -25,6 +34,9 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
+        if geneticAlgorithm.generationSinceLastBest > 50 and geneticAlgorithm.generationSinceLastBest != math.inf:
+            saveResultToCsv(geneticAlgorithm)
+            break
 
         geneticAlgorithm.generateNextPopulation()
         drawGraph(geneticAlgorithm, screen)
@@ -45,6 +57,7 @@ def drawData(geneticAlgorithm, screen):
 
 
 def drawGraph(geneticAlgorithm, screen):
+    print(geneticAlgorithm.bestOrder.citiesOrder)
     drawCitiesLocations(pygame, screen, geneticAlgorithm.cities, white)
     orderedCities = []
     for n in range(len(geneticAlgorithm.bestOrder.citiesOrder)):
