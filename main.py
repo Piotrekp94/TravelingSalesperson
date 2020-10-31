@@ -76,8 +76,5 @@ def drawCurrentShortestPath(pygame, screen, shortestPath, newCitiesOrder, color)
     for n in range(len(shortestPath) - 1):
         pygame.draw.line(screen, color, (shortestPath[n].x, shortestPath[n].y), (
             shortestPath[n + 1].x, shortestPath[n + 1].y), 3)
-        pygame.draw.line(screen, color, (shortestPath[0].x, shortestPath[0].y), (shortestPath[len(
-            newCitiesOrder.citiesOrder) - 1].x, shortestPath[len(newCitiesOrder.citiesOrder) - 1].y), 3)
-
 
 main()
