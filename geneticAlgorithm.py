@@ -6,10 +6,11 @@ from phenotype import *
 
 
 class GeneticAlgorithm:
-    def __init__(self, name):
+    def __init__(self, name, cities, populationSize):
         self.generation = 0
-        self.cities = generateRandomCities(10, 1000, 1000)
-        self.population = generateRandomPopulation(100, self.cities)
+        self.cities = cities
+        self.populationSize = populationSize
+        self.population = generateRandomPopulation(self.populationSize, self.cities)
         self.bestOrder = []
         self.generationSinceLastBest = math.inf
         self.avgDistance = math.inf
@@ -17,10 +18,10 @@ class GeneticAlgorithm:
         self.avgFitness = 0
         self.name = name
         self.thisGenerationShortestDistance = math.inf
-
-        if os.path.exists(self.name + ".csv"):
-            os.remove(self.name + ".csv")
-        writer = csv.writer(open(self.name + ".csv", 'a', newline=''))
+        self.filename = str(len(self.cities)) + "cities" + self.name + ".csv"
+        if os.path.exists(self.filename):
+            os.remove(self.filename)
+        writer = csv.writer(open(self.filename, 'a', newline=''))
         writer.writerow(['AvgDistance', 'LowestDistanceThisGen', 'LowestDistance'])
 
     def generateNextPopulation(self):
@@ -75,7 +76,7 @@ class GeneticAlgorithm:
         self.population = newPopulation
 
     def saveToCsv(self):
-        writer = csv.writer(open(self.name + ".csv", 'a', newline=''))
+        writer = csv.writer(open(self.filename, 'a', newline=''))
         writer.writerow([round(self.avgDistance, 2), round(self.thisGenerationShortestDistance, 2),
                          round(self.shortestDistance, 2)])
 

@@ -4,7 +4,8 @@ from geneticAlgorithm import *
 
 
 def prepareGA():
-    ga = GeneticAlgorithm("PyTest")
+
+    ga = GeneticAlgorithm("PyTest", generateRandomCities(10, 1000, 1000), 4)
     ga.cities = [City(1, 2), City(4, 3), City(5, 6), City(7, 8)]
     ga.population = [Phenotype([0, 1, 2, 3]), Phenotype([3, 2, 0, 1])]
     return ga
